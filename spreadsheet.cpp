@@ -25,7 +25,7 @@ void Spreadsheet::print_selection(std::ostream& out) const
          {
             out << cell_data(i, k) << " ";
          }
-         out << endl;
+         out << std::endl;
       }
    }
    else
@@ -38,7 +38,7 @@ void Spreadsheet::print_selection(std::ostream& out) const
             {
                out << cell_data(i, k) << " ";
             }
-            out << endl;
+            out << std::endl;
          }
       }
    }
