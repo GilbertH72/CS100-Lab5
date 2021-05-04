@@ -4,24 +4,18 @@
 #include <cstring>
 #include "select.hpp"
 
-class Select_Contains : public Select
-{
+class Select_Contains : public Select {
 protected:
-    std::string column;
-    std::string name;
+	int column;
+	std::string subStr;
 public:
-    Select_Contains(const Spreadsheet* sheet, std::string column, std::string name) {
-	this->column = column;
-	this->name = name;
-    }
-
-    // Return true if the specified row should be selected.
-    bool select(const Spreadsheet* sheet, int row) const {
-	if (sheet->cell_data(row, sheet->get_column_by_name(column)) == name)
-	    return true;
-	
-	return false;
-    }
+	Select_Contains(const Spreadsheet* sheet, const std::string& name, const std::string& query) {
+		column = sheet->get_column_by_name(name);
+		this->subStr = query;
+	}
+	virtual bool select(const Spreadsheet* sheet, int row) const {
+		return (sheet->cell_data(row, column).find(subStr) != std::string::npos) ? true : false;
+	}
 };
 
 #endif
